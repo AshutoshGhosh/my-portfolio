@@ -1,32 +1,43 @@
 import React, { useRef } from "react";
 import swal from "sweetalert";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const form = useRef();
 
   const submitForm = (e) => {
     e.preventDefault();
-    // window.Email.send({
-    //   SecureToken: "1fc9621a-1a88-4a0e-8fa2-60b2b2dc3891",
-    //   To: "ghoshashutosh01@gmail.com",
-    //   From: "ghoshashutosh1@gmail.com",
-    //   Subject: "My Portfolio || Contact FORM",
-    //   Body: `<p>name : ${form.current.name.value}</p><br /><p>name : ${form.current.email.value}</p><br /><p>name : ${form.current.message.value}</p><br />`,
-    // })
-    //   .then((message) => {
-    //     swal("Sent!", `Email sent successfully!!`, "success");
-    setTimeout(() => {
-      form.current.name.value = "";
-      form.current.email.value = "";
-      form.current.message.value = "";
-    }, 1000);
-
-    //     console.log("Email sent successfully", message);
-    //   })
-    //   .catch((error) => {
-    //     swal("Oops!", `Something went wrong!!`, "error");
-    //     console.error("Error sending email", error);
-    //   });
+    // eslint-disable-next-line
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (form.current.email.value && form.current.email.value.match(regex)) {
+      let params = {
+        name: form.current.name.value,
+        email: form.current.email.value,
+        message: form.current.message.value,
+      };
+      emailjs
+        .send(
+          "service_smoq4uh",
+          "template_6oke52g",
+          params,
+          "_AeBGesdhsB0cLgDU"
+        )
+        .then(
+          (response) => {
+            swal("Sent!", "Email sent successfully!", "success");
+            form.current.name.value = "";
+            form.current.email.value = "";
+            form.current.message.value = "";
+            console.log("SUCCESS!", response.status, response.text);
+          },
+          (err) => {
+            swal("Oops!", "Something went wrong!", "error");
+            console.log("FAILED...", err);
+          }
+        );
+    } else {
+      swal("Oops!", "Please type correct Email!", "error");
+    }
   };
   return (
     <div
@@ -42,6 +53,7 @@ const Contact = () => {
         className="flex flex-col max-w-[600px] w-full "
         netlify
       >
+        <input type="hidden" name="form-name" value="contact v1" />
         <div className="pb-8">
           <p className="text-4xl font-bold inline border-b-4 border-pink-600 text-gray-300">
             Contact
@@ -51,7 +63,6 @@ const Contact = () => {
             ghoshashutosh01@gmail.com
           </p>
         </div>
-        <input type="hidden" name="form-name" value="contact v1" />
         <input
           className="bg-[#ccd6f6] p-2"
           type="text"
