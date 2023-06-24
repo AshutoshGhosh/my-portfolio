@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import swal from "sweetalert";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
   const form = useRef();
 
   const submitForm = (e) => {
@@ -10,6 +11,7 @@ const Contact = () => {
     // eslint-disable-next-line
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (form.current.email.value && form.current.email.value.match(regex)) {
+      setLoading(true);
       let params = {
         name: form.current.name.value,
         email: form.current.email.value,
@@ -17,20 +19,22 @@ const Contact = () => {
       };
       emailjs
         .send(
-          "service_smoq4uh",
-          "template_6oke52g",
+          process.env.EMAILJS_SERVICE_ID,
+          process.env.EMAILJS_TEMPLATE_ID,
           params,
-          "_AeBGesdhsB0cLgDU"
+          process.env.EMAILJS_PUBLIC_KEY
         )
         .then(
           (response) => {
             swal("Sent!", "Email sent successfully!", "success");
+            setLoading(false);
             form.current.name.value = "";
             form.current.email.value = "";
             form.current.message.value = "";
             console.log("SUCCESS!", response.status, response.text);
           },
           (err) => {
+            setLoading(false);
             swal("Oops!", "Something went wrong!", "error");
             console.log("FAILED...", err);
           }
@@ -83,9 +87,10 @@ const Contact = () => {
         ></textarea>
         <button
           type="submit"
+          disabled={loading}
           className="text-white border-2 hover:bg-pink-600 hover:border-pink-600 px-4 py-3 my-8 mx-auto flex items-center"
         >
-          Let's Collaborate
+          {loading ? <div class="loader"></div> : "Let's Collaborate"}
         </button>
       </form>
     </div>
