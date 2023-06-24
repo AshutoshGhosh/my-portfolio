@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useRef } from "react";
+import swal from "sweetalert";
 
 const Contact = () => {
+  const form = useRef();
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    window.Email.send({
+      SecureToken: "1fc9621a-1a88-4a0e-8fa2-60b2b2dc3891",
+      To: "ghoshashutosh01@gmail.com",
+      From: "ghoshashutosh1@gmail.com",
+      Subject: "My Portfolio || Contact FORM",
+      Body: `<p>name : ${form.current.name.value}</p><br /><p>name : ${form.current.email.value}</p><br /><p>name : ${form.current.message.value}</p><br />`,
+    })
+      .then((message) => {
+        swal("Sent!", `Email sent successfully!!`, "success");
+        debugger;
+        form.current.name.value = "";
+        form.current.email.value = "";
+        form.current.message.value = "";
+        console.log("Email sent successfully", message);
+      })
+      .catch((error) => {
+        swal("Oops!", `Something went wrong!!`, "error");
+        console.error("Error sending email", error);
+      });
+  };
   return (
     <div
       name="contact"
       className="w-full md:h-screen bg-[#0a192f] flex justify-center items-center  pt-[100px] p-4"
     >
       <form
-        action="https://getform.io/f/a2dda926-5b2a-464a-bf7f-5865cfc508d8"
-        method="POST"
+        // action="https://getform.io/f/a2dda926-5b2a-464a-bf7f-5865cfc508d8"
+        // method="POST"
+        ref={form}
+        onSubmit={submitForm}
         className="flex flex-col max-w-[600px] w-full "
       >
         <div className="pb-8">

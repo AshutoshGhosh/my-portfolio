@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
+import LogoRespo from "../assets/logo-respo.png";
 import { FaBars, FaGithub, FaLinkedin, FaTimes } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsFillPersonLinesFill } from "react-icons/bs";
@@ -14,7 +15,18 @@ const Navbar = () => {
   return (
     <div className="fixed w-full h-[80px] flex justify-between items-center px-4 bg-[#08192f] text-gray-300">
       <div>
-        <img src={Logo} alt="logo" style={{ width: "150px" }} />
+        <img
+          className="hidden md:block"
+          src={Logo}
+          alt="logo"
+          style={{ width: "150px" }}
+        />
+        <img
+          className=" md:hidden"
+          src={LogoRespo}
+          alt="logo_responsive"
+          style={{ width: "50px" }}
+        />
       </div>
       {/* Menu */}
       <ul className="hidden md:flex">
