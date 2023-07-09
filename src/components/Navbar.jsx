@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed w-full h-[80px] flex justify-between items-center px-4 bg-[#08192f] text-gray-300">
+    <div className="fixed w-full h-[80px] flex justify-between items-center px-4 bg-[#08192f] text-gray-300 z-50">
       <div>
         <img
           className="hidden md:block"
@@ -43,6 +43,11 @@ const Navbar = () => {
         <li>
           <Link to="skills" smooth={true} duration={500}>
             Skills
+          </Link>
+        </li>
+        <li>
+          <Link to="experience" smooth={true} duration={500}>
+            Experience
           </Link>
         </li>
         <li>
@@ -88,6 +93,16 @@ const Navbar = () => {
               duration={500}
             >
               Skills
+            </Link>
+          </li>
+          <li className="py-6 text-4xl text-center">
+            <Link
+              onClick={handleClick}
+              to="experience"
+              smooth={true}
+              duration={500}
+            >
+              Experience
             </Link>
           </li>
           <li className="py-6 text-4xl text-center">
