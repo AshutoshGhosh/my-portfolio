@@ -55,7 +55,6 @@ const Contact = () => {
         ref={form}
         onSubmit={submitForm}
         className="flex flex-col max-w-[600px] w-full "
-        netlify
       >
         <input type="hidden" name="form-name" value="contact v1" />
         <div className="pb-8">

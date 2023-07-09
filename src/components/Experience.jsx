@@ -92,7 +92,7 @@ const Experience = () => {
 
         {experiences.map((exp, i) => {
           return (
-            <div className="w-full rounded-lg shadow-md shadow-[#040c16]  dark:bg-gray-800 dark:border-gray-700 mt-5 hover:scale-105 duration-500">
+            <div key={i} className="w-full rounded-lg shadow-md shadow-[#040c16]  dark:bg-gray-800 dark:border-gray-700 mt-5 hover:scale-105 duration-500">
               <ul
                 className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800"
                 id="defaultTab"
@@ -159,13 +159,13 @@ const Experience = () => {
                     timeframe.
                   </h2>
                   {/* <!-- List --> */}
-                  <ul
+                  <span
                     role="list"
                     className="space-y-4 text-gray-500 dark:text-gray-400"
                   >
-                    {exp?.jobIncludes.map((ji) => {
+                    {exp?.jobIncludes.map((ji,index) => {
                       return (
-                        <li className="flex space-x-2 items-center">
+                        <li key={index} className="flex space-x-2 items-center">
                           <svg
                             className="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"
                             aria-hidden="true"
@@ -179,7 +179,7 @@ const Experience = () => {
                         </li>
                       );
                     })}
-                  </ul>
+                  </span>
                 </div>
               </div>
             </div>

@@ -59,9 +59,10 @@ const Work = () => {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {/* Card */}
 
-          {projects.map((data) => {
+          {projects.map((data, i) => {
             return (
               <div
+              key={i}
                 style={{ backgroundImage: `url(${data.image})` }}
                 className="shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div"
               >
