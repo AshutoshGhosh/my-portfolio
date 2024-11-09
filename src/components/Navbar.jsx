@@ -160,7 +160,7 @@ const Navbar = () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://drive.google.com/file/d/1AHAJ51VvtGhvfmrPHLnTU02hRLJHNDC8/view?usp=sharing"
+              href="https://drive.google.com/file/d/1e8eXNKODJN5rCrzpgqddDBOeMbRtf6Ir/view?usp=sharing"
               className=" flex justify-between items-center w-full text-gray-300"
             >
               Resume
