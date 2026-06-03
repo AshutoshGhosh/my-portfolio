@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import swal from "sweetalert";
 import emailjs from "@emailjs/browser";
+import SectionHeading from "./ui/SectionHeading";
+import GradientOrbs from "./ui/GradientOrbs";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -31,7 +33,6 @@ const Contact = () => {
             form.current.name.value = "";
             form.current.email.value = "";
             form.current.message.value = "";
-            console.log("SUCCESS!", response.status, response.text);
           },
           (err) => {
             setLoading(false);
@@ -40,59 +41,64 @@ const Contact = () => {
           }
         );
     } else {
-      swal("Oops!", "Please type correct Email!", "error");
+      swal("Oops!", "Please type a correct email!", "error");
     }
   };
+
+  const inputClass =
+    "w-full rounded-xl border border-line bg-white/5 px-4 py-3.5 text-heading placeholder:text-muted/70 outline-none transition-all duration-300 focus:border-accent-violet focus:ring-2 focus:ring-accent-violet/40";
+
   return (
-    <div
+    <section
       name="contact"
-      className="w-full md:h-screen bg-[#0a192f] flex justify-center items-center  pt-[100px] p-4"
+      className="relative flex w-full items-center justify-center overflow-hidden bg-bg section-pad px-6"
     >
-      <form
-        // action="https://getform.io/f/a2dda926-5b2a-464a-bf7f-5865cfc508d8"
-        method="POST"
-        name="contact v1"
-        ref={form}
-        onSubmit={submitForm}
-        className="flex flex-col max-w-[600px] w-full "
-      >
-        <input type="hidden" name="form-name" value="contact v1" />
-        <div className="pb-8">
-          <p className="text-4xl font-bold inline border-b-4 border-pink-600 text-gray-300">
-            Contact
-          </p>
-          <p className="text-gray-300 py-4">
-            Submit the form below OR shoot me an email -
-            ghoshashutosh01@gmail.com
-          </p>
-        </div>
-        <input
-          className="bg-[#ccd6f6] p-2"
-          type="text"
-          name="name"
-          placeholder="Name"
+      <GradientOrbs className="opacity-60" />
+
+      <div className="relative z-10 w-full max-w-2xl">
+        <SectionHeading
+          eyebrow="Let's talk"
+          title="Contact"
+          subtitle="Submit the form below, email ghoshashutosh01@gmail.com, or connect with me on LinkedIn!"
+          align="center"
         />
-        <input
-          className="my-4 p-2 bg-[#ccd6f6]"
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-        <textarea
-          className="bg-[#ccd6f6] p-2"
-          name="message"
-          rows={10}
-          placeholder="Message"
-        ></textarea>
-        <button
-          type="submit"
-          disabled={loading}
-          className="text-white border-2 hover:bg-pink-600 hover:border-pink-600 px-4 py-3 my-8 mx-auto flex items-center"
+
+        <form
+          method="POST"
+          name="contact v1"
+          ref={form}
+          onSubmit={submitForm}
+          className="mt-12 flex flex-col gap-4 rounded-3xl glass p-6 sm:p-8"
         >
-          {loading ? <div class="loader"></div> : "Let's Collaborate"}
-        </button>
-      </form>
-    </div>
+          <input type="hidden" name="form-name" value="contact v1" />
+          <input
+            className={inputClass}
+            type="text"
+            name="name"
+            placeholder="Your name"
+          />
+          <input
+            className={inputClass}
+            type="email"
+            name="email"
+            placeholder="Your email"
+          />
+          <textarea
+            className={inputClass}
+            name="message"
+            rows={6}
+            placeholder="Your message"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-2 flex items-center justify-center rounded-full bg-accent-gradient px-6 py-3.5 font-semibold text-white shadow-glow transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {loading ? <div className="loader" /> : "Let's Collaborate"}
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 

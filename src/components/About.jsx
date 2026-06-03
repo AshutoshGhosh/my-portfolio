@@ -1,40 +1,76 @@
 import React from "react";
+import SectionHeading from "./ui/SectionHeading";
+import Reveal from "./ui/Reveal";
+
+const STATS = [
+  { value: "6+", label: "Years of experience" },
+  { value: "3", label: "Fortune 500 clients" },
+  { value: "60%", label: "Frontend perf gain" },
+  { value: "7", label: "Team members led" },
+];
 
 const About = () => {
   return (
-    <div name="about" className="w-full h-screen bg-[#08192f] text-gray-300">
-      <div className="flex flex-col justify-center items-center w-full h-full">
-        <div className="max-w-[1000px] w-full grid grid-cols-2 gap-8">
-          <div className="sm:text-right pb-8 pl-4">
-            <p className="text-4xl font-bold inline border-b-4 border-pink-600">
-              About
-            </p>
-          </div>
-          <div></div>
-        </div>
-        <div className="max-w-[1000px] w-full grid  sm:grid-cols-2 gap-8 px-4">
-          <div className="sm:text-right text-4xl font-bold">
-            <p>Hi, I'm Ashutosh, nice to meet you. Please take a look around</p>
-          </div>
-          <div>
+    <section
+      name="about"
+      className="relative w-full bg-bg section-pad text-muted"
+    >
+      <div className="mx-auto max-w-6xl px-6">
+        <SectionHeading
+          eyebrow="Get to know me"
+          title="About"
+          subtitle="Hi, I'm Ashutosh — nice to meet you. Here's a little about what I do."
+        />
+
+        <div className="mt-12 grid gap-10 lg:grid-cols-5 lg:gap-16">
+          <Reveal className="lg:col-span-2">
+            <h3 className="font-display text-2xl font-bold leading-snug text-heading sm:text-3xl">
+              A frontend-heavy{" "}
+              <span className="gradient-text-static">Full-Stack Engineer</span>{" "}
+              shipping for Fortune 500s and startups.
+            </h3>
+          </Reveal>
+
+          <Reveal className="space-y-5 text-base leading-relaxed sm:text-lg lg:col-span-3">
             <p>
-              I am a skilled and detail-oriented Software Engineer specializing
-              in web development, with a focus on JavaScript technologies. With
-              expertise in ReactJS, React Native, Vue.js, and Ionic, I create
-              robust and user-friendly web and mobile applications. My backend
-              proficiency includes Node.js and GraphQL, enabling me to build
-              scalable server-side solutions. Experienced in MongoDB, I utilize
-              it for efficient data storage and retrieval. Holding a Bachelor of
-              Technology degree in Computer Science, I combine strong
-              theoretical knowledge with practical experience. Proactive and
-              dedicated, I consistently deliver high-quality projects within
-              deadlines. Let's connect and collaborate on remarkable software
-              solutions.
+              I'm a Full-Stack Software Engineer with 6+ years delivering
+              scalable, high-performance web apps for Fortune 500 enterprises —
+              McDonald's, Microsoft and Amazon — as well as high-growth startups.
+              I specialize in React.js, Next.js, Vue.js and Node.js, with deep
+              expertise in frontend performance, system architecture and
+              AI-augmented development.
             </p>
-          </div>
+            <p>
+              I've led a 7-member cross-functional team, driven a 60% frontend
+              performance gain on a global enterprise platform, and shipped
+              client-ready solutions in fast-paced Agile environments. I lean on
+              AI tools (Claude Code, Cursor, MCP) to automate workflows and
+              accelerate engineering velocity. Let's connect and build something
+              remarkable.
+            </p>
+          </Reveal>
         </div>
+
+        {/* Stat strip */}
+        <Reveal
+          selector="[data-stat]"
+          className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4"
+        >
+          {STATS.map((s) => (
+            <div
+              key={s.label}
+              data-stat
+              className="glass glow-ring rounded-2xl p-6 text-center"
+            >
+              <div className="font-display text-4xl font-bold gradient-text-static">
+                {s.value}
+              </div>
+              <div className="mt-2 text-sm text-muted">{s.label}</div>
+            </div>
+          ))}
+        </Reveal>
       </div>
-    </div>
+    </section>
   );
 };
 
