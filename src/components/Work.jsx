@@ -1,104 +1,137 @@
 import React from "react";
+import { HiArrowNarrowRight } from "react-icons/hi";
+import { FiLock } from "react-icons/fi";
+import SectionHeading from "./ui/SectionHeading";
+import Reveal from "./ui/Reveal";
 
-import synthesis from "../assets/projects/synthesis.png";
-import plantPreFAb from "../assets/projects/plantprefab.png";
-import pilkhuwa from "../assets/projects/pilkhuwa.png";
-import litiLegal from "../assets/projects/litilegal.png";
-import rh from "../assets/projects/rh.png";
-import theincircle from "../assets/projects/theIncircle-e.png";
-
-let projects = [
+const PROJECTS = [
   {
-    name: "Synthesis(A/V conferencing portal)",
-    url: "https://www.asergiscloud.com/free-trial",
-    image: synthesis,
+    name: "McDonald's GRNT",
+    client: "Accenture",
+    description:
+      "Full-stack contributor across Gen1 & Gen2 of McDonald's global restaurant operations platform. Delivered a 60% Gen2 frontend performance gain and integrated Claude-driven test automation, CI/CD, and AI code review.",
+    tags: ["Next.js", "GraphQL", "AWS AppSync", "Amplify", "Vercel", "Claude AI"],
   },
   {
-    name: "Plant PreFab",
+    name: "Value Case",
+    client: "Microsoft · Accenture",
+    description:
+      "Frontend resource on Microsoft's internal Business Operations KPI platform — built complex dashboards and data-viz components for executive KPI tracking.",
+    tags: ["React.js", "Node.js", "REST APIs", "AWS", "Azure Entra ID / SSO"],
+  },
+  {
+    name: "SALT — IVR Management",
+    client: "Amazon Germany · Accenture",
+    description:
+      "Built configuration interfaces and Amazon Connect–integrated workflow components for Amazon Germany's internal IVR management platform.",
+    tags: ["React.js", "Node.js", "AWS", "Amazon Connect"],
+  },
+  {
+    name: "Hyblock Capital",
+    client: "DiverseLynx",
+    description:
+      "Core full-stack contributor on Hyblock's crypto trading research platform — real-time data streaming and WebSocket-driven visualizations. Built a gap-fill portal that auto-filled missed candles, cutting work from hours to minutes.",
+    tags: ["React.js", "Node.js", "WebSockets", "DynamoDB", "Kafka"],
+    url: "https://hyblockcapital.com/",
+  },
+  {
+    name: "Top 22 Picks",
+    client: "Freelance",
+    description:
+      "Designed and built end-to-end as a standalone freelance project — full frontend, backend, and database, deployed to production.",
+    tags: ["Next.js", "React", "Node.js", "Express", "MongoDB"],
+    url: "https://www.top22picks.com",
+  },
+  {
+    name: "Plant Prefab",
+    client: "SmartData",
+    description:
+      "Contributed as part of the team to a sustainable prefabricated-home builder's web platform, building responsive frontend interfaces and feature components.",
+    tags: ["React.js", "Node.js", "JavaScript"],
     url: "https://www.plantprefab.com/",
-    image: plantPreFAb,
   },
   {
-    name: "Pilkhuwa Handlooms(eStore)",
-    // url: "https://www.plantprefab.com/",
-    note: "WebURL currently unavailable due to legal reasons.",
-    image: pilkhuwa,
+    name: "theIncircle",
+    client: "Freelance",
+    description:
+      "Built employee, employer, and admin portals for a blue-collar hiring marketplace.",
+    tags: ["Next.js", "Node.js", "Express", "Redis"],
+    url: "https://www.theincircle.com/employerzone/",
   },
   {
     name: "Restoration Hardware",
+    client: "Freelance",
+    description:
+      "Contributed frontend work for a high-end residential design and hospitality e-commerce site.",
+    tags: ["Vue.js", "Node.js", "Express"],
     url: "https://rh.com/us/en/",
-    image: rh,
-  },
-  {
-    name: "LitiLegal",
-    // url: "https://www.plantprefab.com/",
-    note: "WebURL currently unavailable due to legal reasons.",
-    image: litiLegal,
-  },
-  {
-    name: "TheIncircle(Job Portal)",
-    url: "https://www.theincircle.com/employerzone/",
-    image: theincircle,
   },
 ];
 
 const Work = () => {
-  const goto = (url) => {
-    window.open(url, "_blank");
-  };
   return (
-    <div name="work" className="w-full md:h-screen text-gray-300 bg-[#0a192f]">
-      <div className="max-w-[1000px] mx-auto pt-[100px] p-4 flex flex-col justify-center  w-full h-full">
-        <div className="pb-8">
-          <p className="text-4xl font-bold inline border-b-4 border-pink-600 text-gray-300">
-            Work
-          </p>
-          <p className="py-6">Check out some of my recent works</p>
-        </div>
-        {/* CArd container */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {/* Card */}
+    <section name="work" className="relative w-full bg-bg section-pad text-muted">
+      <div className="mx-auto max-w-6xl px-6">
+        <SectionHeading
+          eyebrow="Selected work"
+          title="Work"
+          subtitle="Key projects across Fortune 500 enterprises and freelance engagements."
+        />
 
-          {projects.map((data, i) => {
-            return (
-              <div
-              key={i}
-                style={{ backgroundImage: `url(${data.image})` }}
-                className="shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div"
-              >
-                {/* Hover Effect */}
-                <div className="opacity-0 group-hover:opacity-100 duration-100 text-center">
-                  <span className="text-2xl font-bold tracking-wider">
-                    {data.name}
+        <Reveal
+          selector="[data-project]"
+          stagger={0.1}
+          className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {PROJECTS.map((project) => (
+            <article
+              key={project.name}
+              data-project
+              className="group flex h-full flex-col rounded-2xl glass glow-ring p-6 transition-transform duration-300 hover:-translate-y-1.5"
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-fuchsia">
+                {project.client}
+              </span>
+              <h3 className="mt-2 font-display text-xl font-bold text-heading">
+                {project.name}
+              </h3>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                {project.description}
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-line bg-white/5 px-2.5 py-1 text-xs text-heading"
+                  >
+                    {tag}
                   </span>
-                  <div className="pt-8 text-center">
-                    {data.url ? (
-                      <a href="/">
-                        <button
-                          onClick={() => {
-                            goto(data.url);
-                          }}
-                          className="animate-bounce text-center rounded-lg px-4 py-3 m-2 bg-white text-gray-700 font-bold text-lg"
-                        >
-                          Web URL
-                        </button>
-                      </a>
-                    ) : (
-                      <span className="text-sm  text-red-500">{data.note}</span>
-                    )}
-                    {/* <a href="/">
-                  <button className="text-center rounded-lg px-4 py-3 m-2 bg-white text-gray-700 font-bold text-lg">
-                    Code
-                  </button>
-                </a> */}
-                  </div>
-                </div>
+                ))}
               </div>
-            );
-          })}
-        </div>
+
+              <div className="mt-5">
+                {project.url ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-heading transition-colors hover:text-accent-cyan"
+                  >
+                    Visit site
+                    <HiArrowNarrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-2 text-xs text-muted">
+                    <FiLock /> Internal / enterprise platform
+                  </span>
+                )}
+              </div>
+            </article>
+          ))}
+        </Reveal>
       </div>
-    </div>
+    </section>
   );
 };
 
